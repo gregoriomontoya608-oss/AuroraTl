@@ -37,7 +37,7 @@ border-radius:8px;
 
 .logoText{
 
-font-size:24px;
+font-size:26px;
 font-weight:900;
 
 }
@@ -51,18 +51,28 @@ gap:6px;
 
 .modes button{
 
-background:#13263b;
+background:linear-gradient(180deg,#1f3a57,#13263b);
+
 border:none;
-padding:6px 10px;
-border-radius:8px;
+
+padding:8px 14px;
+
+border-radius:20px;
+
 color:white;
+
+font-weight:bold;
+
 cursor:pointer;
+
+transition:0.2s;
 
 }
 
 .modes button:hover{
 
-background:#1f3a57;
+background:#2c5cff;
+transform:scale(1.05);
 
 }
 
@@ -180,7 +190,10 @@ gap:10px;
 
 width:40px;
 height:40px;
+
 border-radius:6px;
+
+image-rendering:pixelated;
 
 }
 
