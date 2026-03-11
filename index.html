@@ -15,19 +15,17 @@
 
 </header>
 
-
-<!-- MODES BAR -->
+<!-- MODES -->
 
 <div class="modes">
 
-<div class="mode active">🏆 Overall</div>
-<div class="mode">⚔ LTMS</div>
-<div class="mode">🛡 Vanilla</div>
-<div class="mode">❤️ UHC</div>
-<div class="mode">🧪 Pot</div>
-<div class="mode">🔥 NethOP</div>
-<div class="mode">🌍 SMP</div>
-<div class="mode">⚔ Sword</div>
+<div class="mode active" onclick="changeMode('overall')">🏆 Overall</div>
+<div class="mode" onclick="changeMode('vanilla')">🛡 Vanilla</div>
+<div class="mode" onclick="changeMode('uhc')">❤️ UHC</div>
+<div class="mode" onclick="changeMode('pot')">🧪 Pot</div>
+<div class="mode" onclick="changeMode('nether')">🔥 NetherOP</div>
+<div class="mode" onclick="changeMode('smp')">🌍 SMP</div>
+<div class="mode" onclick="changeMode('sword')">⚔ Sword</div>
 
 </div>
 
@@ -35,9 +33,7 @@
 <!-- SEARCH -->
 
 <div class="search">
-
 <input id="search" placeholder="Buscar jugador..." onkeyup="searchPlayer()">
-
 </div>
 
 
@@ -46,25 +42,27 @@
 <div class="container" id="players"></div>
 
 
-
 <!-- ADMIN PANEL -->
 
 <div class="adminBox">
 
 <div class="adminTitle">⚙ Admin Login</div>
 
-<div class="adminControls">
-
 <input id="user" placeholder="Usuario">
 <input type="password" id="pass" placeholder="Contraseña">
 
 <button onclick="login()">Login</button>
 
-</div>
+<select id="modeSelect" class="hidden">
+<option value="vanilla">Vanilla</option>
+<option value="uhc">UHC</option>
+<option value="pot">Pot</option>
+<option value="nether">NetherOP</option>
+<option value="smp">SMP</option>
+<option value="sword">Sword</option>
+</select>
 
-<button id="addBtn" class="hidden addTierBtn" onclick="addTier()">
-➕ ADD TIERS
-</button>
+<button id="addBtn" class="hidden" onclick="addTier()">➕ ADD TIER</button>
 
 </div>
 
@@ -73,6 +71,7 @@
 
 </body>
 </html>
+
 
 
 
