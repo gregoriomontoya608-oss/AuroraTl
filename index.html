@@ -1,53 +1,284 @@
+<!-- ================= index.html ================= -->
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AuroraTI</title>
-
+<title>AuroraTL</title>
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
 <header>
-<h1>AuroraTI</h1>
-<p>Tecnología • Innovación • Futuro</p>
+<div class="logo">Aurora<span>TL</span></div>
+<div id="loginPanel">
+<input type="password" id="adminPass" placeholder="Admin password">
+<button onclick="login()">Entrar</button>
+</div>
 </header>
 
-<section class="hero">
-<h2>Bienvenido a AuroraTI</h2>
-<p>Soluciones tecnológicas modernas para proyectos digitales.</p>
+<section id="adminControls" class="hidden">
 
-<button onclick="mostrarMensaje()">Explorar</button>
+<input id="nick" placeholder="Nick del jugador">
+
+<select id="mode">
+<option>Mazo</option>
+<option>Diapot</option>
+<option>Sword</option>
+<option>CPvP</option>
+<option>Nethepot</option>
+<option>UHC</option>
+<option>SMP</option>
+</select>
+
+<select id="tier">
+<option>HT1</option>
+<option>LT1</option>
+<option>LT2</option>
+<option>HT2</option>
+<option>HT3</option>
+<option>LT3</option>
+<option>HT4</option>
+<option>LT4</option>
+<option>HT5</option>
+<option>LT5</option>
+</select>
+
+<button onclick="addTier()">Añadir Tier</button>
+
 </section>
 
-<section class="features">
-
-<div class="card">
-<h3>Desarrollo</h3>
-<p>Aplicaciones web modernas.</p>
-</div>
-
-<div class="card">
-<h3>Automatización</h3>
-<p>Optimiza procesos con tecnología.</p>
-</div>
-
-<div class="card">
-<h3>Innovación</h3>
-<p>Ideas tecnológicas para el futuro.</p>
-</div>
-
-</section>
-
-<footer>
-<p>© 2026 AuroraTI</p>
-</footer>
+<div class="container" id="players"></div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
+
+
+/* ================= style.css ================= */
+
+body{
+background:#0d0d12;
+color:white;
+font-family:Arial, Helvetica, sans-serif;
+text-align:center;
+margin:0;
+}
+
+header{
+padding:25px;
+}
+
+.logo{
+font-size:42px;
+font-weight:800;
+letter-spacing:2px;
+}
+
+.logo span{
+color:#8a5cff;
+}
+
+#loginPanel{
+margin-top:10px;
+}
+
+.hidden{
+display:none;
+}
+
+#adminControls{
+margin:20px auto;
+}
+
+input,select{
+padding:8px;
+border-radius:6px;
+border:none;
+margin:5px;
+}
+
+button{
+padding:8px 14px;
+border:none;
+border-radius:6px;
+background:#8a5cff;
+color:white;
+cursor:pointer;
+font-weight:600;
+}
+
+button.delete{
+background:#ff4040;
+}
+
+.container{
+width:1100px;
+max-width:95%;
+margin:auto;
+}
+
+.player{
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#1b1b24;
+padding:12px;
+margin:10px 0;
+border-radius:10px;
+}
+
+.left{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.skin{
+width:42px;
+height:42px;
+border-radius:6px;
+}
+
+.name{
+font-size:18px;
+font-weight:600;
+}
+
+.modes{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+}
+
+.tier{
+background:#2b2b36;
+padding:6px 10px;
+border-radius:20px;
+font-size:12px;
+}
+
+.modeIcon{
+margin-right:4px;
+}
+
+
+// ================= script.js =================
+
+const ADMIN_PASSWORD = "AuroraAdmin123";
+
+let players = JSON.parse(localStorage.getItem("aurora_players")) || [];
+
+function login(){
+
+const pass=document.getElementById("adminPass").value;
+
+if(pass===ADMIN_PASSWORD){
+
+ document.getElementById("adminControls").classList.remove("hidden");
+ document.getElementById("loginPanel").style.display="none";
+
+}
+else{
+ alert("Contraseña incorrecta");
+}
+
+}
+
+function save(){
+localStorage.setItem("aurora_players",JSON.stringify(players));
+}
+
+function getIcon(mode){
+
+if(mode==="Mazo") return "⚒";
+if(mode==="Diapot") return "🧪";
+if(mode==="Sword") return "⚔";
+if(mode==="CPvP") return "🛡";
+if(mode==="Nethepot") return "🔥";
+if(mode==="UHC") return "❤";
+if(mode==="SMP") return "🌍";
+
+return "";
+
+}
+
+function render(){
+
+const container=document.getElementById("players");
+container.innerHTML="";
+
+players.forEach((p,index)=>{
+
+let tiersHTML="";
+
+p.tiers.forEach(t=>{
+
+ tiersHTML+=`<div class="tier"><span class="modeIcon">${getIcon(t.mode)}</span>${t.mode} ${t.tier}</div>`;
+
+});
+
+container.innerHTML+=`
+
+<div class="player">
+
+<div class="left">
+
+<img class="skin" src="https://mc-heads.net/avatar/${p.nick}">
+
+<div class="name">${p.nick}</div>
+
+</div>
+
+<div class="modes">
+${tiersHTML}
+</div>
+
+<button class="delete" onclick="removePlayer(${index})">Eliminar</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+function addTier(){
+
+const nick=document.getElementById("nick").value;
+const tier=document.getElementById("tier").value;
+const mode=document.getElementById("mode").value;
+
+if(nick==="") return;
+
+let player=players.find(p=>p.nick.toLowerCase()===nick.toLowerCase());
+
+if(!player){
+
+player={
+nick:nick,
+tiers:[]
+};
+
+players.push(player);
+
+}
+
+player.tiers.push({mode,tier});
+
+save();
+render();
+
+}
+
+function removePlayer(i){
+
+players.splice(i,1);
+
+save();
+render();
+
+}
+
+render();
