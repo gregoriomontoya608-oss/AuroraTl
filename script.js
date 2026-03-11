@@ -1,9 +1,7 @@
 const USER="Curado"
 const PASS="Aurora123"
 
-const tierOrder=[
-"HT1","LT1","LT2","HT2","HT3","LT3","HT4","LT4","HT5","LT5"
-]
+let currentMode="overall"
 
 let players = JSON.parse(localStorage.getItem("players")) || []
 
@@ -19,6 +17,7 @@ if(u===USER && p===PASS){
 admin=true
 
 document.getElementById("addBtn").classList.remove("hidden")
+document.getElementById("modeSelect").classList.remove("hidden")
 
 alert("Admin activado")
 
@@ -31,43 +30,37 @@ alert("Datos incorrectos")
 }
 
 function save(){
-
 localStorage.setItem("players",JSON.stringify(players))
+}
+
+function changeMode(mode){
+
+currentMode=mode
+
+document.querySelectorAll(".mode").forEach(m=>m.classList.remove("active"))
+
+event.target.classList.add("active")
+
+render()
 
 }
 
-function render(list=players){
+function render(){
 
 const container=document.getElementById("players")
 
 container.innerHTML=""
 
-list.forEach((p,index)=>{
+players.forEach((p,index)=>{
 
-let tiers=""
+let tier=p.tiers[currentMode]
 
-p.tiers.forEach((t,i)=>{
+if(!tier) return
 
 let color="tier"
 
-if(t.includes("HT")) color="tier ht"
-if(t==="LT3"||t==="LT4"||t==="LT5") color="tier high"
-
-tiers+=`<div class="${color}">${t}</div>`
-
-if(admin){
-
-tiers+=`
-
-<button onclick="tierUp(${index},${i})">⬆</button>
-<button onclick="tierDown(${index},${i})">⬇</button>
-<button onclick="editTier(${index},${i})">✏</button>
-
-`
-
-}
-
-})
+if(tier.includes("HT")) color="tier ht"
+if(tier==="LT3"||tier==="LT4"||tier==="LT5") color="tier high"
 
 container.innerHTML+=`
 
@@ -80,10 +73,8 @@ container.innerHTML+=`
 
 </div>
 
-<div>
-
-${tiers}
-
+<div class="${color}">
+${tier}
 </div>
 
 </div>
@@ -100,65 +91,22 @@ let nick=prompt("Nick jugador")
 
 let tier=prompt("Tier")
 
+let mode=document.getElementById("modeSelect").value
+
 let player=players.find(p=>p.nick===nick)
 
 if(!player){
 
-player={nick:nick,tiers:[]}
+player={nick:nick,tiers:{}}
 
 players.push(player)
 
 }
 
-player.tiers.push(tier)
+player.tiers[mode]=tier
 
 save()
 render()
-
-}
-
-function tierUp(p,t){
-
-let index=tierOrder.indexOf(players[p].tiers[t])
-
-if(index>0){
-
-players[p].tiers[t]=tierOrder[index-1]
-
-}
-
-save()
-render()
-
-}
-
-function tierDown(p,t){
-
-let index=tierOrder.indexOf(players[p].tiers[t])
-
-if(index<tierOrder.length-1){
-
-players[p].tiers[t]=tierOrder[index+1]
-
-}
-
-save()
-render()
-
-}
-
-function editTier(p,t){
-
-let newTier=prompt("Nuevo tier")
-
-if(tierOrder.includes(newTier)){
-
-players[p].tiers[t]=newTier
-
-save()
-render()
-
-}
 
 }
 
@@ -168,7 +116,42 @@ let text=document.getElementById("search").value.toLowerCase()
 
 let filtered=players.filter(p=>p.nick.toLowerCase().includes(text))
 
-render(filtered)
+renderFiltered(filtered)
+
+}
+
+function renderFiltered(list){
+
+const container=document.getElementById("players")
+
+container.innerHTML=""
+
+list.forEach(p=>{
+
+let tier=p.tiers[currentMode]
+
+if(!tier) return
+
+container.innerHTML+=`
+
+<div class="player">
+
+<div class="left">
+
+<img class="skin" src="https://mc-heads.net/avatar/${p.nick}">
+<div class="name">${p.nick}</div>
+
+</div>
+
+<div class="tier">
+${tier}
+</div>
+
+</div>
+
+`
+
+})
 
 }
 
