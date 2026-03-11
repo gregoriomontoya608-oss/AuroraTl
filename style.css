@@ -1,63 +1,108 @@
 body{
 
-background:#0a1220;
+background:#0b1622;
 color:white;
 font-family:Arial;
-text-align:center;
+margin:0;
 
 }
 
-
-.title{
+.navbar{
 
 display:flex;
 align-items:center;
-justify-content:center;
-gap:15px;
-margin-top:20px;
+justify-content:space-between;
+
+background:#0f1c2b;
+
+padding:10px 20px;
+
+border-bottom:1px solid #1c2d40;
+
+}
+
+.logoArea{
+
+display:flex;
+align-items:center;
+gap:10px;
 
 }
 
 .logoImg{
 
-width:80px;
-height:80px;
-border-radius:12px;
+width:40px;
+height:40px;
+border-radius:8px;
 
 }
 
 .logoText{
 
-font-size:42px;
+font-size:24px;
 font-weight:900;
 
 }
 
+.navLinks{
+
+display:flex;
+gap:8px;
+
+}
+
+.navLinks button{
+
+background:#13263b;
+border:none;
+padding:8px 12px;
+border-radius:10px;
+color:white;
+cursor:pointer;
+
+}
+
+.navLinks button:hover{
+
+background:#1b3550;
+
+}
+
+.rightSide{
+
+display:flex;
+align-items:center;
+gap:10px;
+
+}
+
+#search{
+
+padding:6px;
+border-radius:8px;
+border:none;
+background:#13263b;
+color:white;
+
+}
 
 .adminCorner{
 
-position:fixed;
-top:10px;
-right:10px;
-
-background:#13233d;
-padding:8px 14px;
+background:#2c5cff;
+padding:6px 10px;
 border-radius:8px;
-
 cursor:pointer;
-
 font-weight:bold;
 
 }
 
-
 .loginBox{
 
 position:fixed;
-top:50px;
-right:10px;
+top:70px;
+right:20px;
 
-background:#13233d;
+background:#13263b;
 
 padding:15px;
 
@@ -65,16 +110,15 @@ border-radius:10px;
 
 display:flex;
 flex-direction:column;
-
 gap:6px;
 
 }
 
-
 .hidden{
-display:none;
-}
 
+display:none;
+
+}
 
 .addBtn{
 
@@ -83,92 +127,44 @@ bottom:20px;
 right:20px;
 
 background:#2c5cff;
-
 border:none;
-
 padding:10px 15px;
-
-border-radius:8px;
-
+border-radius:10px;
 color:white;
-
 font-weight:bold;
-
 cursor:pointer;
 
 }
 
+#players{
 
-.modes{
-
-margin-top:20px;
-
-}
-
-
-.modes button{
-
-margin:4px;
-padding:8px 12px;
-
-border:none;
-border-radius:6px;
-
-background:#13233d;
-
-color:white;
-
-cursor:pointer;
+padding:20px;
 
 }
-
-
-#search{
-
-margin-top:20px;
-
-padding:8px;
-
-width:200px;
-
-border-radius:6px;
-
-border:none;
-
-}
-
 
 .player{
 
-background:#13233d;
+background:#13263b;
 
-margin:10px auto;
+margin-bottom:10px;
 
-padding:10px;
-
-width:500px;
+padding:12px;
 
 border-radius:10px;
 
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
 
 }
 
-
 .tier{
 
 font-weight:900;
-
-padding:4px 8px;
-
+padding:5px 10px;
 border-radius:6px;
 
 }
-
 
 .ht3,.ht4,.ht5{
 
@@ -176,24 +172,8 @@ color:gold;
 
 }
 
-
 .lt3,.lt4,.lt5{
 
-color:#6fb6ff;
-
-}
-
-
-.controls button{
-
-margin-left:5px;
-
-border:none;
-
-padding:4px 6px;
-
-border-radius:4px;
-
-cursor:pointer;
+color:#7cc0ff;
 
 }
