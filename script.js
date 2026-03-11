@@ -22,15 +22,11 @@ const tierPoints={
 }
 
 function savePlayers(){
-
 localStorage.setItem("auroraPlayers",JSON.stringify(players))
-
 }
 
 function toggleLogin(){
-
 document.getElementById("loginBox").classList.toggle("hidden")
-
 }
 
 function login(){
@@ -53,7 +49,6 @@ render()
 function setMode(mode){
 
 currentMode=mode
-
 render()
 
 }
@@ -63,10 +58,13 @@ function addPlayer(){
 if(!admin) return
 
 let nick=prompt("Nick jugador")
+if(!nick) return
 
 let mode=prompt("Modo (sword/uhc/vanilla/smp/nethpot/mace/axe)").toLowerCase()
+if(!mode) return
 
 let tier=prompt("Tier (HT1 LT1 HT2 LT2 HT3 LT3 HT4 LT4 HT5 LT5)").toUpperCase()
+if(!tier) return
 
 let player=players.find(p=>p.nick.toLowerCase()==nick.toLowerCase())
 
@@ -88,7 +86,6 @@ players.push(obj)
 }
 
 savePlayers()
-
 render()
 
 }
@@ -100,7 +97,6 @@ if(!admin) return
 players.splice(index,1)
 
 savePlayers()
-
 render()
 
 }
@@ -112,7 +108,6 @@ if(!admin) return
 delete players[playerIndex].tiers[mode]
 
 savePlayers()
-
 render()
 
 }
@@ -126,9 +121,7 @@ for(let mode in player.tiers){
 let tier=player.tiers[mode]
 
 if(tierPoints[tier]){
-
 total+=tierPoints[tier]
-
 }
 
 }
@@ -161,7 +154,6 @@ return "white"
 function render(){
 
 let container=document.getElementById("players")
-
 container.innerHTML=""
 
 let search=document.getElementById("search").value.toLowerCase()
@@ -169,54 +161,44 @@ let search=document.getElementById("search").value.toLowerCase()
 let sorted=[...players]
 
 if(currentMode=="overall"){
-
 sorted.sort((a,b)=>getPoints(b)-getPoints(a))
-
 }
 
 sorted.forEach((p,index)=>{
 
 if(!p.nick.toLowerCase().includes(search)) return
 
-let tierList=""
+let tierHTML=""
 
 for(let mode in p.tiers){
 
 if(currentMode!="overall" && currentMode!=mode) continue
 
 let tier=p.tiers[mode]
-
 let color=tierColor(tier)
 
-tierList+=`<span style="color:${color};font-weight:bold">
-${tier} </span> ${mode.toUpperCase()}`
+tierHTML+=`<span style="color:${color};font-weight:bold">
+${tier} ${mode.toUpperCase()} </span>`
 
 if(admin){
+tierHTML+=` <button onclick="deleteTier(${players.indexOf(p)},'${mode}')">❌</button>`
+}
 
-tierList+=` <button onclick="deleteTier(${players.indexOf(p)},'${mode}')">❌</button>`
+tierHTML+=" "
 
 }
 
-tierList+=" | "
-
-}
-
-if(tierList==="") return
-
-tierList=tierList.slice(0,-3)
+if(tierHTML==="") return
 
 let medal=""
 
 if(currentMode=="overall"){
-
 if(index==0) medal="🥇"
 if(index==1) medal="🥈"
 if(index==2) medal="🥉"
-
 }
 
 let div=document.createElement("div")
-
 div.className="player"
 
 div.innerHTML=`
@@ -224,11 +206,8 @@ div.innerHTML=`
 <div class="playerInfo">
 
 <div class="skinBox">
-
 <img src="https://mc-heads.net/avatar/${p.nick}/40" class="head">
-
 <img src="https://mc-heads.net/body/${p.nick}/120" class="skin">
-
 </div>
 
 <b>${medal} ${p.nick}</b>
@@ -237,13 +216,13 @@ div.innerHTML=`
 
 <div class="tiers">
 
-${tierList}
+${tierHTML}
 
-${currentMode=="overall" ? " | "+getPoints(p)+" pts" : ""}
+${currentMode=="overall" ? "<span class='points'>"+getPoints(p)+" pts</span>" : ""}
 
 </div>
 
-${admin ? `<button onclick="deletePlayer(${players.indexOf(p)})">🗑 Delete Player</button>` : ""}
+${admin ? `<button onclick="deletePlayer(${players.indexOf(p)})">Delete</button>` : ""}
 
 `
 
@@ -254,3 +233,4 @@ container.appendChild(div)
 }
 
 render()
+
