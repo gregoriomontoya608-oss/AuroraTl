@@ -2,24 +2,40 @@
 <html>
 
 <head>
-
 <title>AuroraTL</title>
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
 
-<div class="title">
+<div class="navbar">
 
+<div class="logoArea">
 <img src="logo.png" class="logoImg">
+<span class="logoText">AuroraTL</span>
+</div>
 
-<h1 class="logoText">AuroraTL</h1>
+<div class="navLinks">
+<button onclick="setMode('overall')">🏆 Overall</button>
+<button onclick="setMode('vanilla')">🛡 Vanilla</button>
+<button onclick="setMode('uhc')">❤️ UHC</button>
+<button onclick="setMode('nethpot')">⚗ NethPot</button>
+<button onclick="setMode('smp')">🌍 SMP</button>
+<button onclick="setMode('sword')">⚔ Sword</button>
+<button onclick="setMode('mace')">🔨 Mace</button>
+<button onclick="setMode('mazo')">🪓 Mazo</button>
+</div>
+
+<div class="rightSide">
+
+<input id="search" placeholder="Search player..." onkeyup="searchPlayer()">
+
+<div class="adminCorner" onclick="toggleLogin()">Admin</div>
 
 </div>
 
+</div>
 
-<div class="adminCorner" onclick="toggleLogin()">Admin</div>
 
 <div id="loginBox" class="loginBox hidden">
 
@@ -31,31 +47,13 @@
 </div>
 
 
-<button id="addBtn" class="addBtn hidden" onclick="addPlayer()">ADD TIER</button>
-
-
-<input id="search" placeholder="Buscar jugador..." onkeyup="searchPlayer()">
-
-
-
-<div class="modes">
-
-<button onclick="setMode('overall')">Overall</button>
-<button onclick="setMode('vanilla')">Vanilla</button>
-<button onclick="setMode('uhc')">UHC</button>
-<button onclick="setMode('nethpot')">NethPot</button>
-<button onclick="setMode('smp')">SMP</button>
-<button onclick="setMode('sword')">Sword</button>
-<button onclick="setMode('mace')">Mace</button>
-<button onclick="setMode('mazo')">Mazo</button>
-
-</div>
+<button id="addBtn" class="addBtn hidden" onclick="addPlayer()">ADD PLAYER</button>
 
 
 <div id="players"></div>
-
 
 <script src="script.js"></script>
 
 </body>
 </html>
+
