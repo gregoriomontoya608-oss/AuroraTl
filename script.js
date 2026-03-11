@@ -3,6 +3,8 @@ let PASS="aurora"
 
 let admin=false
 
+let currentMode="overall"
+
 let players=[
 
 {
@@ -47,13 +49,22 @@ alert("Datos incorrectos")
 }
 
 
+function setMode(mode){
+
+currentMode=mode
+
+render()
+
+}
+
+
 function addPlayer(){
 
 if(!admin)return
 
 let nick=prompt("Nick jugador")
 
-let mode=prompt("Modo (sword/uhc/vanilla/smp/nethpot/mazo/mace)")
+let mode=prompt("Modo (sword/uhc/vanilla/smp/nethpot/mace/mazo)")
 
 let tier=prompt("Tier (HT1 LT1 HT2 LT2 HT3 LT3 HT4 LT4 HT5 LT5)")
 
@@ -100,9 +111,13 @@ let tierList=""
 
 for(let mode in p.tiers){
 
+if(currentMode!="overall" && currentMode!=mode) continue
+
 tierList+=p.tiers[mode]+" "+mode.toUpperCase()+" | "
 
 }
+
+if(tierList==="") return
 
 tierList=tierList.slice(0,-3)
 
@@ -133,6 +148,5 @@ container.appendChild(div)
 })
 
 }
-
 
 render()
