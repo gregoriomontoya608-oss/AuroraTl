@@ -3,9 +3,17 @@ let PASS="aurora"
 
 let admin=false
 
-let mode="overall"
+let players=[
 
-let players=[]
+{
+nick:"Curada",
+tiers:{
+sword:"HT1",
+uhc:"LT1"
+}
+}
+
+]
 
 
 function toggleLogin(){
@@ -39,63 +47,37 @@ alert("Datos incorrectos")
 }
 
 
-function setMode(m){
-
-mode=m
-
-render()
-
-}
-
-
 function addPlayer(){
 
-if(!admin){
-
-alert("Solo admin")
-
-return
-
-}
+if(!admin)return
 
 let nick=prompt("Nick jugador")
 
-let m=prompt("Modo (vanilla/uhc/nethpot/smp/sword/mace/mazo)")
+let mode=prompt("Modo (sword/uhc/vanilla/smp/nethpot/mazo/mace)")
 
 let tier=prompt("Tier (HT1 LT1 HT2 LT2 HT3 LT3 HT4 LT4 HT5 LT5)")
 
-players.push({nick,mode:m,tier})
+let player=players.find(p=>p.nick==nick)
 
-render()
+if(player){
 
-}
+player.tiers[mode]=tier
 
+}else{
 
-function changeTier(i){
+let obj={
 
-if(!admin)return
+nick:nick,
 
-let tier=prompt("Nuevo tier")
-
-players[i].tier=tier
-
-render()
+tiers:{}
 
 }
 
+obj.tiers[mode]=tier
 
-function deletePlayer(i){
-
-if(!admin)return
-
-players.splice(i,1)
-
-render()
+players.push(obj)
 
 }
-
-
-function searchPlayer(){
 
 render()
 
@@ -110,11 +92,19 @@ container.innerHTML=""
 
 let search=document.getElementById("search").value.toLowerCase()
 
-players.forEach((p,i)=>{
-
-if(mode!="overall" && p.mode!=mode)return
+players.forEach((p)=>{
 
 if(!p.nick.toLowerCase().includes(search))return
+
+let tierList=""
+
+for(let mode in p.tiers){
+
+tierList+=p.tiers[mode]+" "+mode.toUpperCase()+" | "
+
+}
+
+tierList=tierList.slice(0,-3)
 
 let div=document.createElement("div")
 
@@ -122,26 +112,17 @@ div.className="player"
 
 div.innerHTML=`
 
-<div>
+<div class="playerInfo">
+
+<img src="https://crafatar.com/avatars/${p.nick}?size=40&overlay" class="head">
 
 <b>${p.nick}</b>
 
-<br>
-
-${p.mode}
-
 </div>
 
-<div class="tier ${p.tier.toLowerCase()}">
+<div class="tiers">
 
-${p.tier}
-
-</div>
-
-<div class="controls">
-
-${admin?`<button onclick="changeTier(${i})">EDIT</button>
-<button onclick="deletePlayer(${i})">X</button>`:""}
+${tierList}
 
 </div>
 
@@ -152,3 +133,6 @@ container.appendChild(div)
 })
 
 }
+
+
+render()
