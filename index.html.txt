@@ -1,85 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
+
 <head>
-<title>Tier List PvP Editable</title>
-<style>
-  body { background:#121212; color:#fff; font-family: Arial; }
-  table { border-collapse: collapse; width: 90%; margin: auto; }
-  th, td { border: 1px solid #444; padding: 10px; text-align: center; }
-  input, select { padding: 5px; margin: 5px; }
-  button { padding: 6px 12px; }
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuroraTI</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<h1 style="text-align:center;">Tier List PvP Editable</h1>
+<header>
+<h1>AuroraTI</h1>
+<p>Tecnología • Innovación • Futuro</p>
+</header>
 
-<table id="playersTable">
-  <thead>
-    <tr>
-      <th>Jugador</th>
-      <th>Puntos</th>
-      <th>Tier</th>
-      <th>Acción</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+<section class="hero">
+<h2>Bienvenido a AuroraTI</h2>
+<p>Soluciones tecnológicas modernas para proyectos digitales.</p>
 
-<div style="text-align:center; margin-top:20px;">
-  <input type="text" id="nameInput" placeholder="Nombre jugador" />
-  <input type="number" id="pointsInput" placeholder="Puntos" />
-  <select id="tierSelect">
-    <option value="S">S</option>
-    <option value="A">A</option>
-    <option value="B">B</option>
-    <option value="C">C</option>
-    <option value="D">D</option>
-  </select>
-  <button onclick="addPlayer()">Añadir jugador</button>
+<button onclick="mostrarMensaje()">Explorar</button>
+</section>
+
+<section class="features">
+
+<div class="card">
+<h3>Desarrollo</h3>
+<p>Aplicaciones web modernas.</p>
 </div>
 
-<script>
-let players = [];
+<div class="card">
+<h3>Automatización</h3>
+<p>Optimiza procesos con tecnología.</p>
+</div>
 
-function renderTable() {
-  const tbody = document.querySelector('#playersTable tbody');
-  tbody.innerHTML = '';
-  players.forEach((p, i) => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td>${p.name}</td>
-      <td>${p.points}</td>
-      <td>${p.tier}</td>
-      <td><button onclick="removePlayer(${i})">Eliminar</button></td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
+<div class="card">
+<h3>Innovación</h3>
+<p>Ideas tecnológicas para el futuro.</p>
+</div>
 
-function addPlayer() {
-  const name = document.getElementById('nameInput').value.trim();
-  const points = Number(document.getElementById('pointsInput').value);
-  const tier = document.getElementById('tierSelect').value;
+</section>
 
-  if (!name || isNaN(points)) {
-    alert('Por favor completa todos los campos correctamente.');
-    return;
-  }
+<footer>
+<p>© 2026 AuroraTI</p>
+</footer>
 
-  players.push({name, points, tier});
-  renderTable();
-  document.getElementById('nameInput').value = '';
-  document.getElementById('pointsInput').value = '';
-}
-
-function removePlayer(index) {
-  players.splice(index, 1);
-  renderTable();
-}
-
-renderTable();
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
