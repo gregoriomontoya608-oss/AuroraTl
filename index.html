@@ -13,26 +13,17 @@
 
 <div class="logo">Aurora<span>TL</span></div>
 
-<div class="loginCorner">
-
-<input id="user" placeholder="Usuario">
-<input type="password" id="pass" placeholder="Contraseña">
-
-<button onclick="login()">Login</button>
-
-</div>
-
 </header>
 
 
-<!-- MODES -->
+<!-- MODES BAR -->
 
-<div class="modesBar">
+<div class="modes">
 
-<div class="mode">🏆 Overall</div>
+<div class="mode active">🏆 Overall</div>
 <div class="mode">⚔ LTMS</div>
 <div class="mode">🛡 Vanilla</div>
-<div class="mode">❤ UHC</div>
+<div class="mode">❤️ UHC</div>
 <div class="mode">🧪 Pot</div>
 <div class="mode">🔥 NethOP</div>
 <div class="mode">🌍 SMP</div>
@@ -43,17 +34,40 @@
 
 <!-- SEARCH -->
 
-<div class="searchBox">
+<div class="search">
 
 <input id="search" placeholder="Buscar jugador..." onkeyup="searchPlayer()">
 
 </div>
 
 
-<button id="addBtn" class="hidden addBtn" onclick="addTier()">➕ Añadir jugador</button>
+<!-- PLAYERS -->
+
+<div class="container" id="players"></div>
 
 
-<div id="players" class="container"></div>
+
+<!-- ADMIN PANEL -->
+
+<div class="adminBox">
+
+<div class="adminTitle">⚙ Admin Login</div>
+
+<div class="adminControls">
+
+<input id="user" placeholder="Usuario">
+<input type="password" id="pass" placeholder="Contraseña">
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<button id="addBtn" class="hidden addTierBtn" onclick="addTier()">
+➕ ADD TIERS
+</button>
+
+</div>
+
 
 <script src="script.js"></script>
 
