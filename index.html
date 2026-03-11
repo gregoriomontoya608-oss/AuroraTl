@@ -4,49 +4,58 @@
 <head>
 
 <title>AuroraTL</title>
-
 <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<h1 class="title">AuroraTL</h1>
+<div class="title">
 
-<div class="topbar">
+<img src="logo.png" class="logoImg">
 
-<input id="search" placeholder="Buscar jugador..." oninput="searchPlayer()">
-
-<div class="login">
-
-<input id="user" placeholder="usuario">
-
-<input id="pass" type="password" placeholder="password">
-
-<button onclick="login()">Admin Login</button>
+<h1 class="logoText">AuroraTL</h1>
 
 </div>
 
+
+<div class="adminCorner" onclick="toggleLogin()">Admin</div>
+
+<div id="loginBox" class="loginBox hidden">
+
+<input id="user" placeholder="Usuario">
+<input id="pass" type="password" placeholder="Contraseña">
+
+<button onclick="login()">Login</button>
+
 </div>
+
+
+<button id="addBtn" class="addBtn hidden" onclick="addPlayer()">ADD TIER</button>
+
+
+<input id="search" placeholder="Buscar jugador..." onkeyup="searchPlayer()">
+
+
 
 <div class="modes">
 
-<button class="mode active" onclick="changeMode('overall')">Overall</button>
-<button class="mode" onclick="changeMode('vanilla')">Vanilla</button>
-<button class="mode" onclick="changeMode('uhc')">UHC</button>
-<button class="mode" onclick="changeMode('nether')">NetherPot</button>
-<button class="mode" onclick="changeMode('smp')">SMP</button>
-<button class="mode" onclick="changeMode('sword')">Sword</button>
-<button class="mode" onclick="changeMode('mace')">Mace</button>
+<button onclick="setMode('overall')">Overall</button>
+<button onclick="setMode('vanilla')">Vanilla</button>
+<button onclick="setMode('uhc')">UHC</button>
+<button onclick="setMode('nethpot')">NethPot</button>
+<button onclick="setMode('smp')">SMP</button>
+<button onclick="setMode('sword')">Sword</button>
+<button onclick="setMode('mace')">Mace</button>
+<button onclick="setMode('mazo')">Mazo</button>
 
 </div>
 
-<button id="addBtn" class="hidden" onclick="addTier()">ADD TIER</button>
 
 <div id="players"></div>
+
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
