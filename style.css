@@ -1,90 +1,67 @@
 body{
-
 background:#0b0f17;
 color:white;
 font-family:Arial;
 margin:0;
-
 }
 
-/* HEADER */
-
 header{
-
 text-align:center;
 padding:30px;
-
 }
 
 .logo{
-
 font-size:40px;
 font-weight:bold;
-
 }
 
 .logo span{
-
 color:#7c5cff;
-
 }
 
-/* MODES BAR */
+/* MODES */
 
 .modes{
-
 display:flex;
 justify-content:center;
-gap:15px;
+gap:10px;
 padding:15px;
 border-bottom:1px solid #1e2635;
-
 }
 
 .mode{
-
 background:#131b2b;
 padding:10px 15px;
 border-radius:10px;
 cursor:pointer;
-
 }
 
 .mode.active{
-
 background:#7c5cff;
-
 }
 
 /* SEARCH */
 
 .search{
-
 text-align:center;
 margin:20px;
-
 }
 
 .search input{
-
 width:300px;
 padding:10px;
 border-radius:10px;
 border:none;
-
 }
 
 /* PLAYERS */
 
 .container{
-
 width:900px;
 margin:auto;
-
 }
 
 .player{
-
 display:flex;
 align-items:center;
 justify-content:space-between;
@@ -92,118 +69,71 @@ background:#131b2b;
 padding:12px;
 margin-bottom:10px;
 border-radius:10px;
-
 }
 
 .left{
-
 display:flex;
 align-items:center;
 gap:10px;
-
 }
 
 .skin{
-
 width:40px;
-
 }
 
 .name{
-
 font-size:18px;
-
 }
 
-/* TIERS */
-
 .tier{
-
 padding:5px 10px;
 border-radius:20px;
 margin:3px;
 display:inline-block;
-font-size:12px;
-
 }
 
 .ht{
-
 background:#4caf50;
-
 }
 
 .lt{
-
 background:#777;
-
 }
 
 .high{
-
 background:#ff9800;
-
 }
 
 /* ADMIN PANEL */
 
 .adminBox{
-
 position:fixed;
 top:20px;
 right:20px;
-
-background:rgba(20,20,30,0.95);
+background:#131b2b;
 padding:15px;
 border-radius:10px;
 width:200px;
-
-box-shadow:0 0 10px rgba(0,0,0,0.5);
-
 }
 
-.adminTitle{
-
-font-weight:bold;
-margin-bottom:10px;
-
-}
-
-.adminControls input{
-
+.adminBox input,
+.adminBox select{
 width:100%;
-padding:6px;
 margin-bottom:6px;
-border:none;
+padding:6px;
 border-radius:5px;
-
+border:none;
 }
 
-.adminControls button{
-
+.adminBox button{
 width:100%;
+padding:7px;
 background:#7c5cff;
 border:none;
-padding:7px;
-color:white;
-border-radius:5px;
-
-}
-
-.addTierBtn{
-
-margin-top:10px;
-width:100%;
-background:#4caf50;
-border:none;
-padding:8px;
 border-radius:5px;
 color:white;
-
 }
 
 .hidden{
-
 display:none;
-
 }
