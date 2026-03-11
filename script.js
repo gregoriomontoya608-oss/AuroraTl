@@ -7,6 +7,15 @@ let players = JSON.parse(localStorage.getItem("players")) || []
 
 let admin=false
 
+const icons={
+vanilla:"🛡",
+uhc:"❤️",
+pot:"🧪",
+nether:"🔥",
+smp:"🌍",
+sword:"⚔"
+}
+
 function login(){
 
 let u=document.getElementById("user").value
@@ -51,16 +60,31 @@ const container=document.getElementById("players")
 
 container.innerHTML=""
 
-players.forEach((p,index)=>{
+players.forEach(p=>{
 
-let tier=p.tiers[currentMode]
+let tiersHTML=""
 
-if(!tier) return
+if(currentMode==="overall"){
 
-let color="tier"
+Object.keys(p.tiers).forEach(mode=>{
 
-if(tier.includes("HT")) color="tier ht"
-if(tier==="LT3"||tier==="LT4"||tier==="LT5") color="tier high"
+tiersHTML+=`
+
+<div class="badge">
+${icons[mode]} ${p.tiers[mode]}
+</div>
+
+`
+
+})
+
+}else{
+
+if(!p.tiers[currentMode]) return
+
+tiersHTML=`<div class="badge">${icons[currentMode]} ${p.tiers[currentMode]}</div>`
+
+}
 
 container.innerHTML+=`
 
@@ -73,8 +97,10 @@ container.innerHTML+=`
 
 </div>
 
-<div class="${color}">
-${tier}
+<div class="tiers">
+
+${tiersHTML}
+
 </div>
 
 </div>
@@ -128,9 +154,13 @@ container.innerHTML=""
 
 list.forEach(p=>{
 
-let tier=p.tiers[currentMode]
+let tiersHTML=""
 
-if(!tier) return
+Object.keys(p.tiers).forEach(mode=>{
+
+tiersHTML+=`<div class="badge">${icons[mode]} ${p.tiers[mode]}</div>`
+
+})
 
 container.innerHTML+=`
 
@@ -143,8 +173,10 @@ container.innerHTML+=`
 
 </div>
 
-<div class="tier">
-${tier}
+<div class="tiers">
+
+${tiersHTML}
+
 </div>
 
 </div>
