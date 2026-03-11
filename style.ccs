@@ -188,3 +188,53 @@ bottom:10px;
 left:10px;
 opacity:0.6;
 }
+#players{
+max-width:900px;
+margin:auto;
+}
+
+.player{
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#0b253d;
+padding:12px;
+margin-bottom:12px;
+border-radius:10px;
+flex-wrap:wrap;
+}
+
+.playerInfo{
+display:flex;
+align-items:center;
+gap:10px;
+min-width:200px;
+}
+
+.tiers{
+flex:1;
+padding-left:15px;
+word-break:break-word;
+}
+
+.tiers span{
+padding:4px 8px;
+border-radius:6px;
+background:#12365a;
+margin-right:6px;
+display:inline-block;
+}
+
+.player button{
+margin-left:6px;
+padding:4px 8px;
+border:none;
+border-radius:6px;
+background:#ff4d4d;
+color:white;
+cursor:pointer;
+}
+
+.player button:hover{
+background:#ff0000;
+}
