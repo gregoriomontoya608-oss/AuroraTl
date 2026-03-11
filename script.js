@@ -168,9 +168,20 @@ function deleteTier(nick){
 
 let mode=currentMode
 
+if(mode==="overall"){
+
+mode=prompt("Que modalidad borrar? vanilla, uhc, nether, smp, sword, mace")
+
+}
+
 let player=players.find(p=>p.nick===nick)
 
-if(!player || !player.tiers[mode]) return
+if(!player || !player.tiers[mode]){
+
+alert("Ese jugador no tiene tier en esa modalidad")
+return
+
+}
 
 delete player.tiers[mode]
 
@@ -182,6 +193,12 @@ render()
 function editTier(nick){
 
 let mode=currentMode
+
+if(mode==="overall"){
+
+mode=prompt("Que modalidad editar? vanilla, uhc, nether, smp, sword, mace")
+
+}
 
 let newTier = prompt("Nuevo tier")
 
