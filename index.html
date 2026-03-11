@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 <meta charset="UTF-8">
 <title>AuroraTL</title>
@@ -10,12 +9,8 @@
 <body>
 
 <header>
-
 <div class="logo">Aurora<span>TL</span></div>
-
 </header>
-
-<!-- MODES -->
 
 <div class="modes">
 
@@ -29,20 +24,11 @@
 
 </div>
 
-
-<!-- SEARCH -->
-
 <div class="search">
 <input id="search" placeholder="Buscar jugador..." onkeyup="searchPlayer()">
 </div>
 
-
-<!-- PLAYERS -->
-
 <div class="container" id="players"></div>
-
-
-<!-- ADMIN PANEL -->
 
 <div class="adminBox">
 
@@ -54,23 +40,25 @@
 <button onclick="login()">Login</button>
 
 <select id="modeSelect" class="hidden">
+
 <option value="vanilla">Vanilla</option>
 <option value="uhc">UHC</option>
 <option value="pot">Pot</option>
 <option value="nether">NetherOP</option>
 <option value="smp">SMP</option>
 <option value="sword">Sword</option>
+
 </select>
 
-<button id="addBtn" class="hidden" onclick="addTier()">➕ ADD TIER</button>
+<button id="addBtn" class="hidden" onclick="addTier()">ADD TIER</button>
 
 </div>
-
 
 <script src="script.js"></script>
 
 </body>
 </html>
+
 
 
 
