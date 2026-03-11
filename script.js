@@ -4,16 +4,7 @@ const PASS="Aurora123"
 let currentMode="overall"
 let admin=false
 
-let players = JSON.parse(localStorage.getItem("players")) || []
-
-const icons={
-vanilla:"icons/vanilla.png",
-uhc:"icons/uhc.png",
-nether:"icons/nether.png",
-smp:"icons/smp.png",
-sword:"icons/sword.png",
-mace:"icons/mace.png"
-}
+let players=JSON.parse(localStorage.getItem("players"))||[]
 
 function login(){
 
@@ -23,8 +14,8 @@ let p=document.getElementById("pass").value
 if(u===USER && p===PASS){
 
 admin=true
+
 document.getElementById("addBtn").classList.remove("hidden")
-document.getElementById("modeSelect").classList.remove("hidden")
 
 render()
 
@@ -32,14 +23,16 @@ alert("Admin activado")
 
 }else{
 
-alert("Datos incorrectos")
+alert("incorrecto")
 
 }
 
 }
 
 function save(){
+
 localStorage.setItem("players",JSON.stringify(players))
+
 }
 
 function changeMode(mode){
@@ -66,31 +59,25 @@ let tiersHTML=""
 
 if(currentMode==="overall"){
 
-Object.keys(p.tiers || {}).forEach(mode=>{
+Object.keys(p.tiers||{}).forEach(mode=>{
 
-tiersHTML+=`
+let tier=p.tiers[mode]
 
-<div class="badge">
-<img class="modeIcon" src="${icons[mode]}">
-${p.tiers[mode]}
-</div>
+let color=tier.toLowerCase().includes("ht")?"ht":"lt"
 
-`
+tiersHTML+=`<div class="tier ${color}"><span class="modeName">${mode}</span> ${tier}</div>`
 
 })
 
 }else{
 
-if(!p.tiers || !p.tiers[currentMode]) return
+if(!p.tiers[currentMode]) return
 
-tiersHTML=`
+let tier=p.tiers[currentMode]
 
-<div class="badge">
-<img class="modeIcon" src="${icons[currentMode]}">
-${p.tiers[currentMode]}
-</div>
+let color=tier.toLowerCase().includes("ht")?"ht":"lt"
 
-`
+tiersHTML=`<div class="tier ${color}"><span class="modeName">${currentMode}</span> ${tier}</div>`
 
 }
 
@@ -101,17 +88,14 @@ container.innerHTML+=`
 <div class="left">
 
 <img class="skin" src="https://mc-heads.net/avatar/${p.nick}">
-<div class="name">${p.nick}</div>
+<div>${p.nick}</div>
 
 </div>
 
-<div class="tiers">
+<div class="tiers">${tiersHTML}</div>
 
-${tiersHTML || "Sin tiers"}
+${admin?`
 
-</div>
-
-${admin ? `
 <div class="adminButtons">
 
 <button onclick="editTier('${p.nick}')">✏</button>
@@ -119,7 +103,8 @@ ${admin ? `
 <button onclick="deletePlayer('${p.nick}')">🗑</button>
 
 </div>
-` : ""}
+
+`:""}
 
 </div>
 
@@ -132,18 +117,19 @@ ${admin ? `
 function addTier(){
 
 let nick=prompt("Nick jugador")
-if(!nick) return
+
+let mode=prompt("Modo (vanilla uhc nether smp sword mace)")
 
 let tier=prompt("Tier (HT1 LT1 etc)")
-if(!tier) return
 
-let mode=document.getElementById("modeSelect").value
+if(!nick||!mode||!tier) return
 
 let player=players.find(p=>p.nick===nick)
 
 if(!player){
 
 player={nick:nick,tiers:{}}
+
 players.push(player)
 
 }
@@ -151,64 +137,51 @@ players.push(player)
 player.tiers[mode]=tier
 
 save()
+
 render()
 
 }
 
 function deletePlayer(nick){
 
-players = players.filter(p => p.nick !== nick)
+players=players.filter(p=>p.nick!==nick)
 
 save()
+
 render()
 
 }
 
 function deleteTier(nick){
 
-let mode=currentMode
-
-if(mode==="overall"){
-
-mode=prompt("Que modalidad borrar? vanilla, uhc, nether, smp, sword, mace")
-
-}
+let mode=prompt("Modalidad a borrar")
 
 let player=players.find(p=>p.nick===nick)
 
-if(!player || !player.tiers[mode]){
-
-alert("Ese jugador no tiene tier en esa modalidad")
-return
-
-}
+if(!player||!player.tiers[mode]) return
 
 delete player.tiers[mode]
 
 save()
+
 render()
 
 }
 
 function editTier(nick){
 
-let mode=currentMode
+let mode=prompt("Modalidad")
 
-if(mode==="overall"){
-
-mode=prompt("Que modalidad editar? vanilla, uhc, nether, smp, sword, mace")
-
-}
-
-let newTier = prompt("Nuevo tier")
+let tier=prompt("Nuevo tier")
 
 let player=players.find(p=>p.nick===nick)
 
 if(!player) return
 
-player.tiers[mode]=newTier
+player.tiers[mode]=tier
 
 save()
+
 render()
 
 }
@@ -218,11 +191,10 @@ function searchPlayer(){
 let text=document.getElementById("search").value.toLowerCase()
 
 const container=document.getElementById("players")
+
 container.innerHTML=""
 
-players
-.filter(p=>p.nick.toLowerCase().includes(text))
-.forEach(p=>{
+players.filter(p=>p.nick.toLowerCase().includes(text)).forEach(p=>{
 
 container.innerHTML+=`
 
@@ -231,7 +203,7 @@ container.innerHTML+=`
 <div class="left">
 
 <img class="skin" src="https://mc-heads.net/avatar/${p.nick}">
-<div class="name">${p.nick}</div>
+<div>${p.nick}</div>
 
 </div>
 
