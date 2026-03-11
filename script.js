@@ -64,7 +64,7 @@ if(!admin) return
 
 let nick=prompt("Nick jugador")
 
-let mode=prompt("Modo (sword/uhc/vanilla/smp/nethpot/mace/mazo)")
+let mode=prompt("Modo (sword/uhc/vanilla/smp/nethpot/mace/axe)").toLowerCase()
 
 let tier=prompt("Tier (HT1 LT1 HT2 LT2 HT3 LT3 HT4 LT4 HT5 LT5)").toUpperCase()
 
@@ -86,6 +86,30 @@ obj.tiers[mode]=tier
 players.push(obj)
 
 }
+
+savePlayers()
+
+render()
+
+}
+
+function deletePlayer(index){
+
+if(!admin) return
+
+players.splice(index,1)
+
+savePlayers()
+
+render()
+
+}
+
+function deleteTier(playerIndex,mode){
+
+if(!admin) return
+
+delete players[playerIndex].tiers[mode]
 
 savePlayers()
 
@@ -164,7 +188,16 @@ let tier=p.tiers[mode]
 
 let color=tierColor(tier)
 
-tierList+=`<span style="color:${color};font-weight:bold">${tier}</span> ${mode.toUpperCase()} | `
+tierList+=`<span style="color:${color};font-weight:bold">
+${tier} </span> ${mode.toUpperCase()}`
+
+if(admin){
+
+tierList+=` <button onclick="deleteTier(${players.indexOf(p)},'${mode}')">❌</button>`
+
+}
+
+tierList+=" | "
 
 }
 
@@ -209,6 +242,8 @@ ${tierList}
 ${currentMode=="overall" ? " | "+getPoints(p)+" pts" : ""}
 
 </div>
+
+${admin ? `<button onclick="deletePlayer(${players.indexOf(p)})">🗑 Delete Player</button>` : ""}
 
 `
 
