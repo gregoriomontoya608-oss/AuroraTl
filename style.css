@@ -126,6 +126,21 @@ background:#7c5cff;
 border:none;
 border-radius:5px;
 color:white;
+cursor:pointer;
+}
+
+.adminButtons{
+display:flex;
+gap:5px;
+}
+
+.adminButtons button{
+background:#222;
+border:none;
+color:white;
+padding:4px 6px;
+border-radius:5px;
+cursor:pointer;
 }
 
 .hidden{
