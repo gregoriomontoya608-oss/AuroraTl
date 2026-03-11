@@ -10,14 +10,12 @@ margin:0;
 .navbar{
 
 display:flex;
-align-items:center;
 justify-content:space-between;
+align-items:center;
 
 background:#0f1c2b;
 
 padding:10px 20px;
-
-border-bottom:1px solid #1c2d40;
 
 }
 
@@ -44,55 +42,29 @@ font-weight:900;
 
 }
 
-.navLinks{
-
-display:flex;
-gap:8px;
-
-}
-
-.navLinks button{
-
-background:#13263b;
-border:none;
-padding:8px 12px;
-border-radius:10px;
-color:white;
-cursor:pointer;
-
-}
-
-.navLinks button:hover{
-
-background:#1b3550;
-
-}
-
 .rightSide{
 
 display:flex;
-align-items:center;
 gap:10px;
 
 }
 
 #search{
 
+background:#13263b;
+border:none;
 padding:6px;
 border-radius:8px;
-border:none;
-background:#13263b;
 color:white;
 
 }
 
-.adminCorner{
+.adminBtn{
 
 background:#2c5cff;
 padding:6px 10px;
 border-radius:8px;
 cursor:pointer;
-font-weight:bold;
 
 }
 
@@ -127,11 +99,17 @@ bottom:20px;
 right:20px;
 
 background:#2c5cff;
+
 border:none;
+
 padding:10px 15px;
+
 border-radius:10px;
+
 color:white;
+
 font-weight:bold;
+
 cursor:pointer;
 
 }
@@ -158,22 +136,24 @@ align-items:center;
 
 }
 
-.tier{
+.playerInfo{
 
-font-weight:900;
-padding:5px 10px;
+display:flex;
+align-items:center;
+gap:10px;
+
+}
+
+.head{
+
+width:40px;
+height:40px;
 border-radius:6px;
 
 }
 
-.ht3,.ht4,.ht5{
+.tiers{
 
-color:gold;
-
-}
-
-.lt3,.lt4,.lt5{
-
-color:#7cc0ff;
+font-weight:bold;
 
 }
