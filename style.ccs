@@ -238,3 +238,6 @@ cursor:pointer;
 .player button:hover{
 background:#ff0000;
 }
+body{
+background:red !important;
+}
