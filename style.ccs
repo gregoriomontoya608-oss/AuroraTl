@@ -1,0 +1,78 @@
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#071a2b;
+color:white;
+}
+
+.navbar{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:10px 20px;
+background:#0b253d;
+}
+
+.logoArea{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logoImg{
+width:40px;
+height:40px;
+}
+
+.logoText{
+font-size:22px;
+font-weight:bold;
+}
+
+.modes button{
+margin:0 4px;
+padding:6px 12px;
+border:none;
+border-radius:20px;
+background:#173a5c;
+color:white;
+cursor:pointer;
+}
+
+.modes button:hover{
+background:#2c5cff;
+}
+
+.rightSide{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.discordBtn{
+background:#5865f2;
+padding:6px 14px;
+border-radius:10px;
+color:white;
+text-decoration:none;
+}
+
+.adminBtn{
+background:#2c5cff;
+padding:6px 14px;
+border-radius:10px;
+cursor:pointer;
+}
+
+#search{
+padding:6px;
+border-radius:8px;
+border:none;
+}
+
+.footer{
+position:fixed;
+bottom:10px;
+left:10px;
+opacity:0.6;
+}
