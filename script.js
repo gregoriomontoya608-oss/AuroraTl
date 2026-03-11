@@ -6,20 +6,32 @@ let currentMode="overall"
 
 let players = JSON.parse(localStorage.getItem("auroraPlayers")) || []
 
+const tierPoints={
 
-function savePlayers(){
-
-localStorage.setItem("auroraPlayers", JSON.stringify(players))
+"LT5":1,
+"HT5":2,
+"LT4":3,
+"HT4":5,
+"LT3":10,
+"HT3":13,
+"LT2":15,
+"HT2":20,
+"LT1":25,
+"HT1":30
 
 }
 
+function savePlayers(){
+
+localStorage.setItem("auroraPlayers",JSON.stringify(players))
+
+}
 
 function toggleLogin(){
 
 document.getElementById("loginBox").classList.toggle("hidden")
 
 }
-
 
 function login(){
 
@@ -34,14 +46,9 @@ document.getElementById("addBtn").classList.remove("hidden")
 
 render()
 
-}else{
-
-alert("Datos incorrectos")
-
 }
 
 }
-
 
 function setMode(mode){
 
@@ -51,7 +58,6 @@ render()
 
 }
 
-
 function addPlayer(){
 
 if(!admin) return
@@ -60,7 +66,7 @@ let nick=prompt("Nick jugador")
 
 let mode=prompt("Modo (sword/uhc/vanilla/smp/nethpot/mace/mazo)")
 
-let tier=prompt("Tier (HT1 LT1 HT2 LT2 HT3 LT3 HT4 LT4 HT5 LT5)")
+let tier=prompt("Tier (HT1 LT1 HT2 LT2 HT3 LT3 HT4 LT4 HT5 LT5)").toUpperCase()
 
 let player=players.find(p=>p.nick.toLowerCase()==nick.toLowerCase())
 
@@ -87,6 +93,46 @@ render()
 
 }
 
+function getPoints(player){
+
+let total=0
+
+for(let mode in player.tiers){
+
+let tier=player.tiers[mode]
+
+if(tierPoints[tier]){
+
+total+=tierPoints[tier]
+
+}
+
+}
+
+return total
+
+}
+
+function tierColor(tier){
+
+if(tier=="HT1") return "#ff4d4d"
+if(tier=="LT1") return "#ff7a7a"
+
+if(tier=="HT2") return "#ff944d"
+if(tier=="LT2") return "#ffb366"
+
+if(tier=="HT3") return "#ffd700"
+if(tier=="LT3") return "#ffe066"
+
+if(tier=="HT4") return "#66ccff"
+if(tier=="LT4") return "#99ddff"
+
+if(tier=="HT5") return "#aaaaaa"
+if(tier=="LT5") return "#777777"
+
+return "white"
+
+}
 
 function render(){
 
@@ -96,7 +142,15 @@ container.innerHTML=""
 
 let search=document.getElementById("search").value.toLowerCase()
 
-players.forEach((p)=>{
+let sorted=[...players]
+
+if(currentMode=="overall"){
+
+sorted.sort((a,b)=>getPoints(b)-getPoints(a))
+
+}
+
+sorted.forEach((p,index)=>{
 
 if(!p.nick.toLowerCase().includes(search)) return
 
@@ -106,13 +160,27 @@ for(let mode in p.tiers){
 
 if(currentMode!="overall" && currentMode!=mode) continue
 
-tierList+=p.tiers[mode]+" "+mode.toUpperCase()+" | "
+let tier=p.tiers[mode]
+
+let color=tierColor(tier)
+
+tierList+=`<span style="color:${color};font-weight:bold">${tier}</span> ${mode.toUpperCase()} | `
 
 }
 
 if(tierList==="") return
 
 tierList=tierList.slice(0,-3)
+
+let medal=""
+
+if(currentMode=="overall"){
+
+if(index==0) medal="🥇"
+if(index==1) medal="🥈"
+if(index==2) medal="🥉"
+
+}
 
 let div=document.createElement("div")
 
@@ -122,15 +190,23 @@ div.innerHTML=`
 
 <div class="playerInfo">
 
-<img src="https://minotar.net/avatar/${p.nick}/40" class="head">
+<div class="skinBox">
 
-<b>${p.nick}</b>
+<img src="https://mc-heads.net/avatar/${p.nick}/40" class="head">
+
+<img src="https://mc-heads.net/body/${p.nick}/120" class="skin">
+
+</div>
+
+<b>${medal} ${p.nick}</b>
 
 </div>
 
 <div class="tiers">
 
 ${tierList}
+
+${currentMode=="overall" ? " | "+getPoints(p)+" pts" : ""}
 
 </div>
 
