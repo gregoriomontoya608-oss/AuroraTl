@@ -1,61 +1,52 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 
 <head>
-<meta charset="UTF-8">
+
 <title>AuroraTL</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<header>
-<div class="logo">Aurora<span>TL</span></div>
-</header>
+<h1 class="title">AuroraTL</h1>
+
+<div class="topbar">
+
+<input id="search" placeholder="Buscar jugador..." oninput="searchPlayer()">
+
+<div class="login">
+
+<input id="user" placeholder="usuario">
+
+<input id="pass" type="password" placeholder="password">
+
+<button onclick="login()">Admin Login</button>
+
+</div>
+
+</div>
 
 <div class="modes">
 
-<div class="mode active" onclick="changeMode('overall')">🏆 Overall</div>
-<div class="mode" onclick="changeMode('vanilla')">🛡 Vanilla</div>
-<div class="mode" onclick="changeMode('uhc')">❤️ UHC</div>
-<div class="mode" onclick="changeMode('nether')">🔥 NetherOP</div>
-<div class="mode" onclick="changeMode('smp')">🌍 SMP</div>
-<div class="mode" onclick="changeMode('sword')">⚔ Sword</div>
-<div class="mode" onclick="changeMode('mace')">🔨 Mazo</div>
+<button class="mode active" onclick="changeMode('overall')">Overall</button>
+<button class="mode" onclick="changeMode('vanilla')">Vanilla</button>
+<button class="mode" onclick="changeMode('uhc')">UHC</button>
+<button class="mode" onclick="changeMode('nether')">NetherPot</button>
+<button class="mode" onclick="changeMode('smp')">SMP</button>
+<button class="mode" onclick="changeMode('sword')">Sword</button>
+<button class="mode" onclick="changeMode('mace')">Mace</button>
 
 </div>
-
-<div class="search">
-<input id="search" placeholder="Buscar jugador..." onkeyup="searchPlayer()">
-</div>
-
-<div class="container" id="players"></div>
-
-<div class="adminBox">
-
-<div class="adminTitle">Admin Login</div>
-
-<input id="user" placeholder="Usuario">
-<input type="password" id="pass" placeholder="Contraseña">
-
-<button onclick="login()">Login</button>
-
-<select id="modeSelect" class="hidden">
-
-<option value="vanilla">Vanilla</option>
-<option value="uhc">UHC</option>
-<option value="nether">NetherOP</option>
-<option value="smp">SMP</option>
-<option value="sword">Sword</option>
-<option value="mace">Mazo</option>
-
-</select>
 
 <button id="addBtn" class="hidden" onclick="addTier()">ADD TIER</button>
 
-</div>
+<div id="players"></div>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
