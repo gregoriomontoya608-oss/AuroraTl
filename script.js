@@ -2,18 +2,17 @@ const USER="Curado"
 const PASS="Aurora123"
 
 let currentMode="overall"
+let admin=false
 
 let players = JSON.parse(localStorage.getItem("players")) || []
 
-let admin=false
-
 const icons={
-vanilla:"🛡",
-uhc:"❤️",
-pot:"🧪",
-nether:"🔥",
-smp:"🌍",
-sword:"⚔"
+vanilla:"icons/vanilla.png",
+uhc:"icons/uhc.png",
+nether:"icons/nether.png",
+smp:"icons/smp.png",
+sword:"icons/sword.png",
+mace:"icons/mace.png"
 }
 
 function login(){
@@ -24,9 +23,10 @@ let p=document.getElementById("pass").value
 if(u===USER && p===PASS){
 
 admin=true
-
 document.getElementById("addBtn").classList.remove("hidden")
 document.getElementById("modeSelect").classList.remove("hidden")
+
+render()
 
 alert("Admin activado")
 
@@ -66,12 +66,13 @@ let tiersHTML=""
 
 if(currentMode==="overall"){
 
-Object.keys(p.tiers).forEach(mode=>{
+Object.keys(p.tiers || {}).forEach(mode=>{
 
 tiersHTML+=`
 
 <div class="badge">
-${icons[mode]} ${p.tiers[mode]}
+<img class="modeIcon" src="${icons[mode]}">
+${p.tiers[mode]}
 </div>
 
 `
@@ -80,9 +81,16 @@ ${icons[mode]} ${p.tiers[mode]}
 
 }else{
 
-if(!p.tiers[currentMode]) return
+if(!p.tiers || !p.tiers[currentMode]) return
 
-tiersHTML=`<div class="badge">${icons[currentMode]} ${p.tiers[currentMode]}</div>`
+tiersHTML=`
+
+<div class="badge">
+<img class="modeIcon" src="${icons[currentMode]}">
+${p.tiers[currentMode]}
+</div>
+
+`
 
 }
 
@@ -99,9 +107,19 @@ container.innerHTML+=`
 
 <div class="tiers">
 
-${tiersHTML}
+${tiersHTML || "Sin tiers"}
 
 </div>
+
+${admin ? `
+<div class="adminButtons">
+
+<button onclick="editTier('${p.nick}')">✏</button>
+<button onclick="deleteTier('${p.nick}')">❌</button>
+<button onclick="deletePlayer('${p.nick}')">🗑</button>
+
+</div>
+` : ""}
 
 </div>
 
@@ -114,8 +132,10 @@ ${tiersHTML}
 function addTier(){
 
 let nick=prompt("Nick jugador")
+if(!nick) return
 
-let tier=prompt("Tier")
+let tier=prompt("Tier (HT1 LT1 etc)")
+if(!tier) return
 
 let mode=document.getElementById("modeSelect").value
 
@@ -124,7 +144,6 @@ let player=players.find(p=>p.nick===nick)
 if(!player){
 
 player={nick:nick,tiers:{}}
-
 players.push(player)
 
 }
@@ -136,31 +155,57 @@ render()
 
 }
 
+function deletePlayer(nick){
+
+players = players.filter(p => p.nick !== nick)
+
+save()
+render()
+
+}
+
+function deleteTier(nick){
+
+let mode=currentMode
+
+let player=players.find(p=>p.nick===nick)
+
+if(!player || !player.tiers[mode]) return
+
+delete player.tiers[mode]
+
+save()
+render()
+
+}
+
+function editTier(nick){
+
+let mode=currentMode
+
+let newTier = prompt("Nuevo tier")
+
+let player=players.find(p=>p.nick===nick)
+
+if(!player) return
+
+player.tiers[mode]=newTier
+
+save()
+render()
+
+}
+
 function searchPlayer(){
 
 let text=document.getElementById("search").value.toLowerCase()
 
-let filtered=players.filter(p=>p.nick.toLowerCase().includes(text))
-
-renderFiltered(filtered)
-
-}
-
-function renderFiltered(list){
-
 const container=document.getElementById("players")
-
 container.innerHTML=""
 
-list.forEach(p=>{
-
-let tiersHTML=""
-
-Object.keys(p.tiers).forEach(mode=>{
-
-tiersHTML+=`<div class="badge">${icons[mode]} ${p.tiers[mode]}</div>`
-
-})
+players
+.filter(p=>p.nick.toLowerCase().includes(text))
+.forEach(p=>{
 
 container.innerHTML+=`
 
@@ -170,12 +215,6 @@ container.innerHTML+=`
 
 <img class="skin" src="https://mc-heads.net/avatar/${p.nick}">
 <div class="name">${p.nick}</div>
-
-</div>
-
-<div class="tiers">
-
-${tiersHTML}
 
 </div>
 
