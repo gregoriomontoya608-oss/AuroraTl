@@ -3,21 +3,29 @@ body{
 background:#020617;
 color:white;
 font-family:Arial;
-padding:20px;
+padding:30px;
 
 }
 
-/* titulo */
+/* LOGO AURORATL */
 
 .title{
 
-font-size:40px;
-color:#3b82f6;
-margin-bottom:20px;
+font-size:48px;
+font-weight:900;
+
+background:linear-gradient(90deg,#60a5fa,#2563eb,#9333ea);
+-webkit-background-clip:text;
+color:transparent;
+
+letter-spacing:2px;
+margin-bottom:30px;
+
+text-shadow:0 0 20px rgba(59,130,246,0.5);
 
 }
 
-/* login admin */
+/* PANEL ADMIN */
 
 .adminPanel{
 
@@ -25,41 +33,75 @@ position:absolute;
 top:20px;
 right:20px;
 
+background:rgba(15,23,42,0.95);
+border:1px solid #1e40af;
+
+padding:12px 16px;
+border-radius:10px;
+
+display:flex;
+align-items:center;
+gap:8px;
+
+box-shadow:0 0 15px rgba(0,0,0,0.6);
+
 }
+
+/* INPUT LOGIN */
 
 .adminPanel input{
 
-padding:6px;
-background:#0f172a;
+background:#020617;
 border:1px solid #2563eb;
 color:white;
-margin-right:5px;
+
+padding:6px 8px;
+border-radius:6px;
 
 }
+
+/* BOTON LOGIN */
 
 .adminPanel button{
 
 background:#2563eb;
 border:none;
 color:white;
-padding:6px 10px;
+
+padding:6px 12px;
+border-radius:6px;
+
 cursor:pointer;
+font-weight:bold;
+
+transition:0.2s;
 
 }
 
-/* buscador */
+.adminPanel button:hover{
+
+background:#1d4ed8;
+transform:scale(1.05);
+
+}
+
+/* BUSCADOR */
 
 #search{
 
-padding:8px;
+padding:8px 10px;
+
 background:#0f172a;
 border:1px solid #2563eb;
+
 color:white;
+border-radius:6px;
+
 margin-bottom:20px;
 
 }
 
-/* modos */
+/* MODOS */
 
 .modes{
 
@@ -71,10 +113,22 @@ margin-bottom:20px;
 
 background:#0f172a;
 border:1px solid #2563eb;
+
 color:white;
-padding:8px 12px;
-margin-right:5px;
+
+padding:8px 14px;
+margin-right:6px;
+
 cursor:pointer;
+border-radius:6px;
+
+transition:0.2s;
+
+}
+
+.mode:hover{
+
+background:#1e40af;
 
 }
 
@@ -84,20 +138,34 @@ background:#2563eb;
 
 }
 
-/* jugadores */
+/* JUGADORES */
 
 .player{
 
 display:flex;
 justify-content:space-between;
 align-items:center;
+
 background:#0f172a;
-border:1px solid #1e40af;
-padding:10px;
+
+border:1px solid #1e3a8a;
+
+padding:12px;
 margin-bottom:10px;
-border-radius:6px;
+
+border-radius:8px;
+
+transition:0.2s;
 
 }
+
+.player:hover{
+
+background:#172554;
+
+}
+
+/* NICK + SKIN */
 
 .left{
 
@@ -105,15 +173,20 @@ display:flex;
 align-items:center;
 gap:10px;
 
+font-weight:bold;
+
 }
 
 .skin{
 
-width:32px;
-height:32px;
-border-radius:4px;
+width:34px;
+height:34px;
+
+border-radius:6px;
 
 }
+
+/* TIERS */
 
 .tiers{
 
@@ -123,8 +196,6 @@ flex-wrap:wrap;
 
 }
 
-/* nombre modalidad */
-
 .modeName{
 
 color:#60a5fa;
@@ -132,17 +203,17 @@ font-size:12px;
 
 }
 
-/* tiers base */
+/* BASE TIER */
 
 .tier{
 
-padding:4px 6px;
-border-radius:4px;
+padding:4px 7px;
+border-radius:5px;
 font-size:12px;
 
 }
 
-/* HT1 HT2 */
+/* HT bajos */
 
 .ht1,.ht2{
 
@@ -158,38 +229,64 @@ background:#1e293b;
 
 }
 
-/* tiers altos dorados */
+/* HT ALTOS DORADOS */
 
 .ht3,.ht4,.ht5{
 
-background:gold;
+background:linear-gradient(90deg,#ffd700,#ffcc00);
+
 color:black;
 font-weight:bold;
 
+box-shadow:0 0 8px rgba(255,215,0,0.7);
+
 }
 
-/* botones admin */
+/* BOTONES ADMIN */
 
 .adminButtons button{
 
 margin-left:5px;
+
 background:#2563eb;
 border:none;
+
 color:white;
-cursor:pointer;
+
 padding:4px 6px;
+
+cursor:pointer;
+border-radius:4px;
 
 }
 
-/* boton añadir */
+.adminButtons button:hover{
+
+background:#1d4ed8;
+
+}
+
+/* BOTON ADD */
 
 .addBtn{
 
 background:#2563eb;
+
 border:none;
 color:white;
+
 padding:8px 14px;
+
+border-radius:6px;
+
 cursor:pointer;
+
 margin-bottom:20px;
+
+}
+
+.addBtn:hover{
+
+background:#1d4ed8;
 
 }
