@@ -1,39 +1,31 @@
 .skinBox{
-
-position:relative;
-display:inline-block;
-
+    position: relative;
+    display: inline-block;
 }
 
 .skin{
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%); /* centra correctamente */
 
-position:absolute;
-top:-10px;
-left:50px;
+    width: 120px;
+    display: none;
 
-width:120px;
-
-display:none;
-
-z-index:10;
-
+    z-index: 10;
 }
 
 .skinBox:hover .skin{
-
-display:block;
-
+    display: block;
 }
 
 .head{
+    width: 40px;
+    height: 40px;
 
-width:40px;
-height:40px;
+    border-radius: 6px;
+    border: 2px solid #2c5cff;
 
-border-radius:6px;
-
-border:2px solid #2c5cff;
-
-image-rendering:pixelated;
-
+    image-rendering: pixelated;
+    display: block;
 }
