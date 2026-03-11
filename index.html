@@ -1,6 +1,6 @@
-<!-- ================= index.html ================= -->
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <title>AuroraTL</title>
@@ -10,50 +10,55 @@
 <body>
 
 <header>
+
 <div class="logo">Aurora<span>TL</span></div>
-<div id="loginPanel">
-<input type="password" id="adminPass" placeholder="Admin password">
-<button onclick="login()">Entrar</button>
+
+<div class="loginCorner">
+
+<input id="user" placeholder="Usuario">
+<input type="password" id="pass" placeholder="Contraseña">
+
+<button onclick="login()">Login</button>
+
 </div>
+
 </header>
 
-<section id="adminControls" class="hidden">
 
-<input id="nick" placeholder="Nick del jugador">
+<!-- MODES -->
 
-<select id="mode">
-<option>Mazo</option>
-<option>Diapot</option>
-<option>Sword</option>
-<option>CPvP</option>
-<option>Nethepot</option>
-<option>UHC</option>
-<option>SMP</option>
-</select>
+<div class="modesBar">
 
-<select id="tier">
-<option>HT1</option>
-<option>LT1</option>
-<option>LT2</option>
-<option>HT2</option>
-<option>HT3</option>
-<option>LT3</option>
-<option>HT4</option>
-<option>LT4</option>
-<option>HT5</option>
-<option>LT5</option>
-</select>
+<div class="mode">🏆 Overall</div>
+<div class="mode">⚔ LTMS</div>
+<div class="mode">🛡 Vanilla</div>
+<div class="mode">❤ UHC</div>
+<div class="mode">🧪 Pot</div>
+<div class="mode">🔥 NethOP</div>
+<div class="mode">🌍 SMP</div>
+<div class="mode">⚔ Sword</div>
 
-<button onclick="addTier()">Añadir Tier</button>
+</div>
 
-</section>
 
-<div class="container" id="players"></div>
+<!-- SEARCH -->
+
+<div class="searchBox">
+
+<input id="search" placeholder="Buscar jugador..." onkeyup="searchPlayer()">
+
+</div>
+
+
+<button id="addBtn" class="hidden addBtn" onclick="addTier()">➕ Añadir jugador</button>
+
+
+<div id="players" class="container"></div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
-
 
 
 
