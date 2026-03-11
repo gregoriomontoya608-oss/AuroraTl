@@ -1,51 +1,83 @@
 body{
-font-family: Arial, sans-serif;
-margin:0;
-background:#0f172a;
+background:#0d0d12;
 color:white;
+font-family:Arial;
 text-align:center;
+margin:0;
 }
 
 header{
-padding:40px;
-background:#020617;
+padding:25px;
 }
 
-.hero{
-padding:80px 20px;
+.logo{
+font-size:42px;
+font-weight:800;
+}
+
+.logo span{
+color:#8a5cff;
+}
+
+.hidden{
+display:none;
+}
+
+.container{
+width:1100px;
+max-width:95%;
+margin:auto;
+}
+
+.player{
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#1b1b24;
+padding:12px;
+margin:10px 0;
+border-radius:10px;
+}
+
+.left{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.skin{
+width:42px;
+height:42px;
+border-radius:6px;
+}
+
+.name{
+font-size:18px;
+font-weight:600;
+}
+
+.modes{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+}
+
+.tier{
+background:#2b2b36;
+padding:6px 10px;
+border-radius:20px;
+font-size:12px;
 }
 
 button{
-padding:12px 25px;
+padding:8px 14px;
 border:none;
-background:#38bdf8;
+border-radius:6px;
+background:#8a5cff;
 color:white;
-font-size:16px;
 cursor:pointer;
-border-radius:8px;
 }
 
-button:hover{
-background:#0ea5e9;
-}
-
-.features{
-display:flex;
-justify-content:center;
-gap:20px;
-padding:40px;
-flex-wrap:wrap;
-}
-
-.card{
-background:#1e293b;
-padding:25px;
-border-radius:10px;
-width:220px;
-}
-
-footer{
-margin-top:40px;
-padding:20px;
-background:#020617;
+button.delete{
+background:#ff4040;
 }
