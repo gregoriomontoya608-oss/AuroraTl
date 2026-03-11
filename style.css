@@ -10,8 +10,8 @@ margin:0;
 .navbar{
 
 display:flex;
-justify-content:space-between;
 align-items:center;
+justify-content:space-between;
 
 background:#0f1c2b;
 
@@ -42,10 +42,51 @@ font-weight:900;
 
 }
 
+.modes{
+
+display:flex;
+gap:6px;
+
+}
+
+.modes button{
+
+background:#13263b;
+border:none;
+padding:6px 10px;
+border-radius:8px;
+color:white;
+cursor:pointer;
+
+}
+
+.modes button:hover{
+
+background:#1f3a57;
+
+}
+
 .rightSide{
 
 display:flex;
+align-items:center;
 gap:10px;
+
+}
+
+.discordBtn{
+
+background:#5865F2;
+
+padding:6px 10px;
+
+border-radius:8px;
+
+color:white;
+
+text-decoration:none;
+
+font-size:14px;
 
 }
 
@@ -99,17 +140,11 @@ bottom:20px;
 right:20px;
 
 background:#2c5cff;
-
 border:none;
-
 padding:10px 15px;
-
 border-radius:10px;
-
 color:white;
-
 font-weight:bold;
-
 cursor:pointer;
 
 }
@@ -123,11 +158,8 @@ padding:20px;
 .player{
 
 background:#13263b;
-
 margin-bottom:10px;
-
 padding:12px;
-
 border-radius:10px;
 
 display:flex;
@@ -155,5 +187,19 @@ border-radius:6px;
 .tiers{
 
 font-weight:bold;
+
+}
+
+.footer{
+
+position:fixed;
+
+bottom:10px;
+
+left:10px;
+
+opacity:0.6;
+
+font-size:12px;
 
 }
