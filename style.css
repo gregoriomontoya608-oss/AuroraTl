@@ -1,46 +1,65 @@
 body{
 
-background:#0f172a;
+background:#020617;
 color:white;
 font-family:Arial;
 padding:20px;
 
 }
 
+/* titulo */
+
 .title{
 
 font-size:40px;
-
-}
-
-.topbar{
-
-display:flex;
-justify-content:space-between;
+color:#3b82f6;
 margin-bottom:20px;
 
 }
 
-#search{
+/* login admin */
 
-padding:8px;
-border-radius:6px;
-border:none;
+.adminPanel{
+
+position:absolute;
+top:20px;
+right:20px;
 
 }
 
-.login input{
+.adminPanel input{
 
 padding:6px;
+background:#0f172a;
+border:1px solid #2563eb;
+color:white;
 margin-right:5px;
 
 }
 
-.login button{
+.adminPanel button{
 
+background:#2563eb;
+border:none;
+color:white;
 padding:6px 10px;
+cursor:pointer;
 
 }
+
+/* buscador */
+
+#search{
+
+padding:8px;
+background:#0f172a;
+border:1px solid #2563eb;
+color:white;
+margin-bottom:20px;
+
+}
+
+/* modos */
 
 .modes{
 
@@ -50,12 +69,11 @@ margin-bottom:20px;
 
 .mode{
 
+background:#0f172a;
+border:1px solid #2563eb;
+color:white;
 padding:8px 12px;
 margin-right:5px;
-background:#1f2937;
-border:none;
-color:white;
-border-radius:6px;
 cursor:pointer;
 
 }
@@ -66,15 +84,18 @@ background:#2563eb;
 
 }
 
+/* jugadores */
+
 .player{
 
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:#1e293b;
+background:#0f172a;
+border:1px solid #1e40af;
 padding:10px;
 margin-bottom:10px;
-border-radius:8px;
+border-radius:6px;
 
 }
 
@@ -102,44 +123,73 @@ flex-wrap:wrap;
 
 }
 
+/* nombre modalidad */
+
 .modeName{
 
-background:#334155;
-padding:4px 6px;
-border-radius:5px;
+color:#60a5fa;
 font-size:12px;
 
 }
+
+/* tiers base */
 
 .tier{
 
 padding:4px 6px;
-border-radius:5px;
+border-radius:4px;
 font-size:12px;
 
 }
 
-.ht{
+/* HT1 HT2 */
 
-background:#ef4444;
+.ht1,.ht2{
+
+background:#2563eb;
+
+}
+
+/* LT */
+
+.lt1,.lt2{
+
+background:#1e293b;
 
 }
 
-.lt{
+/* tiers altos dorados */
 
-background:#3b82f6;
+.ht3,.ht4,.ht5{
+
+background:gold;
+color:black;
+font-weight:bold;
 
 }
+
+/* botones admin */
 
 .adminButtons button{
 
 margin-left:5px;
+background:#2563eb;
+border:none;
+color:white;
 cursor:pointer;
+padding:4px 6px;
 
 }
 
-.hidden{
+/* boton añadir */
 
-display:none;
+.addBtn{
+
+background:#2563eb;
+border:none;
+color:white;
+padding:8px 14px;
+cursor:pointer;
+margin-bottom:20px;
 
 }
