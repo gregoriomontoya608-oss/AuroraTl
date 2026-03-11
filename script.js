@@ -1,52 +1,51 @@
-const ADMIN_PASSWORD = "AuroraAdmin123"
+const USER="Curado"
+const PASS="kleiver"
 
-let players = JSON.parse(localStorage.getItem("aurora_players")) || []
+let players = JSON.parse(localStorage.getItem("players")) || []
 
 function login(){
 
-const pass=document.getElementById("adminPass").value
+let u=document.getElementById("user").value
+let p=document.getElementById("pass").value
 
-if(pass===ADMIN_PASSWORD){
+if(u===USER && p===PASS){
 
-document.getElementById("adminControls").classList.remove("hidden")
-document.getElementById("loginPanel").style.display="none"
+document.getElementById("addBtn").classList.remove("hidden")
+
+alert("Admin activado")
 
 }else{
 
-alert("Contraseña incorrecta")
+alert("Datos incorrectos")
 
 }
 
 }
 
 function save(){
-localStorage.setItem("aurora_players",JSON.stringify(players))
-}
 
-function getIcon(mode){
-
-if(mode==="Mazo") return "⚒"
-if(mode==="Diapot") return "🧪"
-if(mode==="Sword") return "⚔"
-if(mode==="CPvP") return "🛡"
-if(mode==="Nethepot") return "🔥"
-if(mode==="UHC") return "❤"
-if(mode==="SMP") return "🌍"
+localStorage.setItem("players",JSON.stringify(players))
 
 }
 
-function render(){
+function render(list=players){
 
 const container=document.getElementById("players")
+
 container.innerHTML=""
 
-players.forEach((p,index)=>{
+list.forEach(p=>{
 
-let tiersHTML=""
+let tiers=""
 
 p.tiers.forEach(t=>{
 
-tiersHTML+=`<div class="tier">${t.mode} ${t.tier}</div>`
+let color="tier"
+
+if(t.includes("HT")) color="tier ht"
+if(t==="LT3"||t==="LT4"||t==="LT5") color="tier high"
+
+tiers+=`<div class="${color}">${t}</div>`
 
 })
 
@@ -57,16 +56,15 @@ container.innerHTML+=`
 <div class="left">
 
 <img class="skin" src="https://mc-heads.net/avatar/${p.nick}">
-
 <div class="name">${p.nick}</div>
 
 </div>
 
-<div class="modes">
-${tiersHTML}
-</div>
+<div>
 
-<button class="delete" onclick="removePlayer(${index})">Eliminar</button>
+${tiers}
+
+</div>
 
 </div>
 
@@ -78,38 +76,34 @@ ${tiersHTML}
 
 function addTier(){
 
-const nick=document.getElementById("nick").value
-const tier=document.getElementById("tier").value
-const mode=document.getElementById("mode").value
+let nick=prompt("Nick jugador")
 
-if(nick==="") return
+let tier=prompt("Tier")
 
-let player=players.find(p=>p.nick.toLowerCase()===nick.toLowerCase())
+let player=players.find(p=>p.nick===nick)
 
 if(!player){
 
-player={
-nick:nick,
-tiers:[]
-}
+player={nick:nick,tiers:[]}
 
 players.push(player)
 
 }
 
-player.tiers.push({mode,tier})
+player.tiers.push(tier)
 
 save()
 render()
 
 }
 
-function removePlayer(i){
+function searchPlayer(){
 
-players.splice(i,1)
+let text=document.getElementById("search").value.toLowerCase()
 
-save()
-render()
+let filtered=players.filter(p=>p.nick.toLowerCase().includes(text))
+
+render(filtered)
 
 }
 
