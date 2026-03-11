@@ -1,10 +1,19 @@
-const USER="Curado"
-const PASS="Aurora123"
+let USER="admin"
+let PASS="aurora"
 
-let currentMode="overall"
 let admin=false
 
-let players=JSON.parse(localStorage.getItem("players"))||[]
+let mode="overall"
+
+let players=[]
+
+
+function toggleLogin(){
+
+document.getElementById("loginBox").classList.toggle("hidden")
+
+}
+
 
 function login(){
 
@@ -17,202 +26,129 @@ admin=true
 
 document.getElementById("addBtn").classList.remove("hidden")
 
-render()
-
 alert("Admin activado")
 
+render()
+
 }else{
 
-alert("incorrecto")
+alert("Datos incorrectos")
 
 }
 
 }
 
-function save(){
 
-localStorage.setItem("players",JSON.stringify(players))
+function setMode(m){
 
-}
-
-function changeMode(mode){
-
-currentMode=mode
-
-document.querySelectorAll(".mode").forEach(m=>m.classList.remove("active"))
-
-event.target.classList.add("active")
+mode=m
 
 render()
 
 }
 
-function render(){
 
-const container=document.getElementById("players")
+function addPlayer(){
 
-container.innerHTML=""
+if(!admin){
 
-players.forEach(p=>{
+alert("Solo admin")
 
-let tiersHTML=""
-
-if(currentMode==="overall"){
-
-Object.keys(p.tiers||{}).forEach(mode=>{
-
-let tier=p.tiers[mode]
-
-let color=tier.toLowerCase().includes("ht")?"ht":"lt"
-
-tiersHTML+=`<div class="tier ${color}"><span class="modeName">${mode}</span> ${tier}</div>`
-
-})
-
-}else{
-
-if(!p.tiers[currentMode]) return
-
-let tier=p.tiers[currentMode]
-
-let color=tier.toLowerCase().includes("ht")?"ht":"lt"
-
-tiersHTML=`<div class="tier ${color}"><span class="modeName">${currentMode}</span> ${tier}</div>`
+return
 
 }
-
-container.innerHTML+=`
-
-<div class="player">
-
-<div class="left">
-
-<img class="skin" src="https://mc-heads.net/avatar/${p.nick}">
-<div>${p.nick}</div>
-
-</div>
-
-<div class="tiers">${tiersHTML}</div>
-
-${admin?`
-
-<div class="adminButtons">
-
-<button onclick="editTier('${p.nick}')">✏</button>
-<button onclick="deleteTier('${p.nick}')">❌</button>
-<button onclick="deletePlayer('${p.nick}')">🗑</button>
-
-</div>
-
-`:""}
-
-</div>
-
-`
-
-})
-
-}
-
-function addTier(){
 
 let nick=prompt("Nick jugador")
 
-let mode=prompt("Modo (vanilla uhc nether smp sword mace)")
+let m=prompt("Modo (vanilla/uhc/nethpot/smp/sword/mace/mazo)")
 
-let tier=prompt("Tier (HT1 LT1 etc)")
+let tier=prompt("Tier (HT1 LT1 HT2 LT2 HT3 LT3 HT4 LT4 HT5 LT5)")
 
-if(!nick||!mode||!tier) return
-
-let player=players.find(p=>p.nick===nick)
-
-if(!player){
-
-player={nick:nick,tiers:{}}
-
-players.push(player)
-
-}
-
-player.tiers[mode]=tier
-
-save()
+players.push({nick,mode:m,tier})
 
 render()
 
 }
 
-function deletePlayer(nick){
 
-players=players.filter(p=>p.nick!==nick)
+function changeTier(i){
 
-save()
-
-render()
-
-}
-
-function deleteTier(nick){
-
-let mode=prompt("Modalidad a borrar")
-
-let player=players.find(p=>p.nick===nick)
-
-if(!player||!player.tiers[mode]) return
-
-delete player.tiers[mode]
-
-save()
-
-render()
-
-}
-
-function editTier(nick){
-
-let mode=prompt("Modalidad")
+if(!admin)return
 
 let tier=prompt("Nuevo tier")
 
-let player=players.find(p=>p.nick===nick)
-
-if(!player) return
-
-player.tiers[mode]=tier
-
-save()
+players[i].tier=tier
 
 render()
 
 }
 
+
+function deletePlayer(i){
+
+if(!admin)return
+
+players.splice(i,1)
+
+render()
+
+}
+
+
 function searchPlayer(){
 
-let text=document.getElementById("search").value.toLowerCase()
+render()
 
-const container=document.getElementById("players")
+}
+
+
+function render(){
+
+let container=document.getElementById("players")
 
 container.innerHTML=""
 
-players.filter(p=>p.nick.toLowerCase().includes(text)).forEach(p=>{
+let search=document.getElementById("search").value.toLowerCase()
 
-container.innerHTML+=`
+players.forEach((p,i)=>{
 
-<div class="player">
+if(mode!="overall" && p.mode!=mode)return
 
-<div class="left">
+if(!p.nick.toLowerCase().includes(search))return
 
-<img class="skin" src="https://mc-heads.net/avatar/${p.nick}">
-<div>${p.nick}</div>
+let div=document.createElement("div")
+
+div.className="player"
+
+div.innerHTML=`
+
+<div>
+
+<b>${p.nick}</b>
+
+<br>
+
+${p.mode}
 
 </div>
+
+<div class="tier ${p.tier.toLowerCase()}">
+
+${p.tier}
+
+</div>
+
+<div class="controls">
+
+${admin?`<button onclick="changeTier(${i})">EDIT</button>
+<button onclick="deletePlayer(${i})">X</button>`:""}
 
 </div>
 
 `
 
+container.appendChild(div)
+
 })
 
 }
-
-render()
